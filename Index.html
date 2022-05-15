@@ -1,0 +1,357 @@
+<html>
+<head>
+<link rel="stylesheet" href="style.css">
+<script> 
+var nb = 0 ; 
+window.onload = function change(){
+	let a= document.getElementById("user").innerHTML=localStorage.getItem("username");
+        // khdhina el esm ml input (type =text ) mtaa page login.html
+	     var img = document.createElement("img");
+        
+        var filename =localStorage.getItem("pic");
+        
+        filename = filename.substring(filename.lastIndexOf('\\')+1);
+
+            // Tester si le fichier uploadé est une image
+            extension = filename.substring(filename.lastIndexOf('.')+1);
+            switch(extension)
+            {
+                case "png":
+                case "jpg":
+                case "jpeg":
+                case "gif":
+                case "bmp":
+                 img.src = "images\\" + filename; break;
+                 default:
+                 img.src = "images\\default.png";
+                    break;
+            }
+			img.id="profile";
+            span = document.getElementById("span");
+			span.appendChild(img);    
+                                 }
+
+								 
+		function profile()
+		{
+		document.getElementById('id02').style.display='block';
+	
+        k = document.getElementById("nom1").value = localStorage.getItem("username");
+        z = document.getElementById("ncin1").value = localStorage.getItem("num"); 
+		t = document.getElementById("email").value = localStorage.getItem("email");  
+		}
+
+
+        function update()
+		{   
+			nom=  document.getElementById("nom1").value;
+			ncin= document.getElementById("ncin1").value ;
+		    email= document.getElementById("email").value;
+
+			localStorage.setItem("email",email);
+			localStorage.setItem("username",nom);
+			localStorage.setItem("num",ncin);
+   
+			let a= document.getElementById("user").innerHTML=localStorage.getItem("username");
+			document.getElementById('id02').style.display='none';
+
+		}
+
+
+
+
+
+
+
+		function verif_ncin(ncin) {
+            let v = true;
+            let taille = ncin.length;
+            for(let i=0; i<taille; ++i) {
+                if ((ncin.charAt(i) < "0") || (ncin.charAt(i) > "9") || (taille!=8)) 
+                    v = false;
+            }
+            return v;
+        }
+
+
+		function add_contact()
+        { 
+
+		  var valid=true;
+         let nom = document.getElementById("nom").value;
+         let file=document.getElementById("photo").value;
+		 let num = document.getElementById("ncin").value;
+		 let job=  document.getElementById("job").value;
+         let field=document.getElementById("contenu");
+         erreur="";
+           
+          
+		 if(nom.length <= 0) { 
+                erreur += 'You need to enter your name!  ';
+           
+                valid = false;
+            }
+
+		 if(job.length <= 0) { 
+                erreur += 'You need to enter your job!  ';
+           
+                valid = false;
+            }
+
+         
+			if(num.length <= 0) { 
+                erreur += 'You need to enter your number!  ';
+              
+                valid = false;
+            } else if (!verif_ncin(num)) {
+                erreur += ' Invalid number!  ';
+               
+                valid = false;
+            }
+
+       
+
+
+		 if(valid)
+		        {  
+		 nb++ ;			
+         let kaka=document.createElement("div");
+		 kaka.id="contact";
+         let a=document.createElement("h2");
+         let node1 = document.createTextNode(nom);
+		 a.id="esm";
+         a.appendChild(node1);
+        
+		 let b = document.createElement("span");
+		 let node2=document.createTextNode(num);
+         b.appendChild(node2);
+         b.id="span1";
+
+
+		 let c = document.createElement("span");
+		 let node3=document.createTextNode(job);
+		 c.id="span2";
+         c.appendChild(node3);
+		 
+		 
+
+            var img = document.createElement("img");
+            var filename = file;
+            filename = filename.substring(filename.lastIndexOf('\\')+1);
+
+            // Tester si le fichier uploadé est une image
+            extension = filename.substring(filename.lastIndexOf('.')+1);
+            switch(extension)
+            {
+                case "png":
+                case "jpg":
+                case "jpeg":
+                case "gif":
+                case "bmp":
+                 img.src = "images\\" + filename;
+                    break;
+                 default:
+                 img.src = "images\\default.png";
+                    break;
+            }
+            img.width = 90;
+            img.height = 150;
+            
+          let up=document.createElement("p");
+		  let update=document.createTextNode("Update");
+		   up.appendChild(update);
+		   up.id="up";
+
+
+
+
+		   up.onclick = function updatecontact()
+
+
+		   {
+
+			document.getElementById('id03').style.display='block';    
+           esm = document.getElementById("NAME").value = nom;
+           numero = document.getElementById("NCIN").value = num; 
+		   jo= document.getElementById("JOB").value = job;  
+
+		   }
+
+
+		let del=document.createElement("p");
+		let delet=document.createTextNode("Delete");
+		del.id="del";
+		del.appendChild(delet);
+
+        
+		  
+		 kaka.appendChild(up);
+		 kaka.appendChild(del);
+         kaka.appendChild(img);
+         kaka.appendChild(a);
+		 kaka.appendChild(b);
+		 kaka.appendChild(c);
+         field.appendChild(kaka);
+         document.getElementById('id01').style.display='none';
+		 
+		             }
+
+
+
+
+		else alert(erreur);
+		
+
+        }
+
+  function update2(){
+
+  let a=document.getElementById("NAME").value;
+  let b=document.getElementById("NCIN").value;
+  let c=document.getElementById("JOB").value;
+  
+
+   let esm= document.getElementById("esm").innerHTML=a;
+   let NCIN= document.getElementById("span1").innerHTML=b;
+   let JOBB= document.getElementById("span2").innerHTML=c;
+
+ 
+   document.getElementById('id03').style.display='none'
+
+
+  }
+
+
+
+
+
+         
+
+  
+
+</script>
+</head>
+  <body>
+	<nav>
+		   <span id="span"> 
+			    
+			    <a id="user" onclick="profile();" ></a>
+			</span>
+		   <h1>Contactium,</h1>
+		   <ul> 
+			  <li><a href="#ser">Contacts</a></li>
+			  <li><a href="#ser">About</a></li>
+			</ul> 
+		</nav>	 
+
+	
+   <section> 
+	   <div id="add">
+	 <h2 id="titre"> Contacts </h2>
+	 <p onclick="document.getElementById('id01').style.display='block'" id="btn"> <img src="file:///C:/Users/spirit/Desktop/projet/add-circle-outline-logo-icon-png-svg.png" width ="25px" height=" 25px">  Add Contact </button> 
+	 <p onclick="" id="btn1"><img src="file:///C:/Users/spirit/Desktop/projet/add-circle-outline-logo-icon-png-svg%20-%20Copy.png" width ="25px" height=" 25px">Clear list </button> 
+       </div>
+	
+      <div id="contenu"> 
+    
+
+	  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	  
+
+	   
+    
+	<div id="id01" class="modal">
+		<span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">×</span>
+		   <form class="modal-content">
+		   <div class="container">
+			
+			<p class="welcome">Welcome to Contactium! </p>
+			<p class="sign" align="center"> Contact Informations</p>
+			     <form class="form1" >
+			         <input class="un " type="text" align="center" placeholder="Full name" id="nom">
+			         <input class="pass" type="text" align="center" placeholder="Number" id="ncin">
+					 <input class="pass" type="text" align="center" placeholder="Employment" id="job">
+			         <input class="pass" type="file" align="center" placeholder="Photo" id="photo">
+				
+			         <a onclick="add_contact();" type="submit" id="addbut">Add Contact </a>      
+			         <a id="cancel" onclick="document.getElementById('id01').style.display='none'" id="cancel" >Cancel</a>
+
+			     </form>
+		      </div>
+		    </form>
+
+	 </div>
+
+
+	  <div id="id02" class="modal">
+		<span onclick="document.getElementById('id02').style.display='none'" class="close" title="Close Modal">×</span>
+		<form class="modal-content">
+		   <div class="container">
+			
+			<p class="welcome">Welcome to Contactium! </p>
+			<p class="sign" align="center">Profile Informations</p>
+			<form class="form1" >
+			  <input class="un " type="text" align="center"  id="nom1"  >
+			  <input class="pass" type="text" align="center"  id="ncin1"   >
+			  <input class="pass" type="email" align="center"  id="email" placeholder="Email" >
+			  <a onclick="update();" type="submit" id="addbut">Update profile</a>      
+			  <a id="cancel" onclick="document.getElementById('id02').style.display='none'" id="cancel" >Cancel</a>
+              
+			</form>
+		    </div>
+		</form>
+
+	  </div>
+
+	  
+
+	  <div id="id03" class="modal">
+		<span onclick="document.getElementById('id03').style.display='none'" class="close" title="Close Modal">×</span>
+		<form class="modal-content">
+		   <div class="container">
+			
+			<p class="welcome">Welcome to Contactium! </p>
+			<p class="sign" align="center">New Profile Informations</p>
+			<form class="form1" >
+			  <input class="un " type="text" align="center"  id="NAME"  >
+			  <input class="pass" type="text" align="center"  id="NCIN"   >
+			  <input class="pass" type="text" align="center"  id="JOB" placeholder="Job" >
+			  <a onclick="update2();" type="submit" id="addbut">Update profile</a>      
+			  <a id="cancel" onclick="document.getElementById('id03').style.display='none'" id="cancel" >Cancel</a>
+              
+			</form>
+		    </div>
+		</form>
+
+	  </div>
+
+
+
+
+
+
+
+
+
+   </section>
