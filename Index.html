@@ -2,8 +2,13 @@
 <head>
 <link rel="stylesheet" href="style.css">
 <script> 
+
 var nb = 0 ; 
 window.onload = function change(){
+
+	retrieve();  
+	
+
 	let a= document.getElementById("user").innerHTML=localStorage.getItem("username");
         // khdhina el esm ml input (type =text ) mtaa page login.html
 	     var img = document.createElement("img");
@@ -28,7 +33,12 @@ window.onload = function change(){
             }
 			img.id="profile";
             span = document.getElementById("span");
-			span.appendChild(img);    
+			span.appendChild(img);  
+			
+			
+           
+     
+
                                  }
 
 								 
@@ -38,8 +48,10 @@ window.onload = function change(){
 	
         k = document.getElementById("nom1").value = localStorage.getItem("username");
         z = document.getElementById("ncin1").value = localStorage.getItem("num"); 
-		t = document.getElementById("email").value = localStorage.getItem("email");  
+		t = document.getElementById("email").value = localStorage.getItem("email"); 
 		}
+
+
 
 
         function update()
@@ -56,8 +68,6 @@ window.onload = function change(){
 			document.getElementById('id02').style.display='none';
 
 		}
-
-
 
 
 
@@ -114,7 +124,8 @@ window.onload = function change(){
 
 		 if(valid)
 		        {  
-		 nb++ ;			
+		 nb++ ;
+		 document.getElementById("nocont").style.display="none";
          let kaka=document.createElement("div");
 		 kaka.id="contact";
          let a=document.createElement("h2");
@@ -162,8 +173,7 @@ window.onload = function change(){
 		   up.appendChild(update);
 		   up.id="up";
 
-
-
+			
 
 		   up.onclick = function updatecontact()
 
@@ -177,14 +187,24 @@ window.onload = function change(){
 
 		   }
 
+		  
+
+
 
 		let del=document.createElement("p");
 		let delet=document.createTextNode("Delete");
 		del.id="del";
+
+		del.addEventListener("click", function () {
+        this.parentElement.remove();
+		field=document.getElementById("contenu");
+         localStorage.setItem("Folder1", field.innerHTML);
+        nb--;
+        });
+
 		del.appendChild(delet);
 
-        
-		  
+	
 		 kaka.appendChild(up);
 		 kaka.appendChild(del);
          kaka.appendChild(img);
@@ -192,42 +212,84 @@ window.onload = function change(){
 		 kaka.appendChild(b);
 		 kaka.appendChild(c);
          field.appendChild(kaka);
+        
+
+		 localStorage.setItem("Folder1", field.innerHTML);
+		
          document.getElementById('id01').style.display='none';
-		 
+         
+		 nb++;
 		             }
-
-
-
-
 		else alert(erreur);
 		
 
         }
 
-  function update2(){
-
-  let a=document.getElementById("NAME").value;
-  let b=document.getElementById("NCIN").value;
-  let c=document.getElementById("JOB").value;
-  
-
-   let esm= document.getElementById("esm").innerHTML=a;
-   let NCIN= document.getElementById("span1").innerHTML=b;
-   let JOBB= document.getElementById("span2").innerHTML=c;
-
- 
-   document.getElementById('id03').style.display='none'
-
-
-  }
+	 
 
 
 
+		function retrieve() {
+    if (localStorage.getItem("Folder1") === null) a=document.getElementById("nocont").style.display="block";
+    else {
+      document.getElementById("contenu").innerHTML = localStorage.getItem("Folder1");
+      document.getElementById("nocont").style.display="none";
+
+      let buttons = document.getElementsByTagName("p");
+       
+      for (var z = 0; z < buttons.length; z++) {
+
+        if (buttons[z].innerText == "Delete") {
+           buttons[z].addEventListener("click", function () {
+            this.parentElement.remove();
+			nb--;
+			field=document.getElementById("contenu");
+            localStorage.setItem("Folder1", field.innerHTML);});
+                                             }
+                                               }
+		
+        let clear=document.getElementById("btn1");
+		clear.addEventListener("click",function() {
+        document.getElementById("contenu").remove();
+		localStorage.removeItem('Folder1');}) 
+       
+	    field=document.getElementById("contenu");
+	     localStorage.setItem("Folder1", field.innerHTML);
+									 }
+									   
+			 }						   
+	  
 
 
-         
 
-  
+
+
+	 function update2()
+	 {
+
+    let a=document.getElementById("NAME").value;
+    let b=document.getElementById("NCIN").value;
+    let c=document.getElementById("JOB").value;
+    
+
+    let esm= document.getElementById("esm").innerHTML=a;
+    let NCIN= document.getElementById("span1").innerHTML=b;
+    let JOBB= document.getElementById("span2").innerHTML=c;
+
+
+     document.getElementById('id03').style.display='none'
+
+
+}
+
+   function clear1()
+   {
+	document.getElementById("contenu").remove();
+	localStorage.removeItem('Folder1');
+	 
+	
+   }
+
 
 </script>
 </head>
@@ -248,46 +310,31 @@ window.onload = function change(){
    <section> 
 	   <div id="add">
 	 <h2 id="titre"> Contacts </h2>
-	 <p onclick="document.getElementById('id01').style.display='block'" id="btn"> <img src="file:///C:/Users/spirit/Desktop/projet/add-circle-outline-logo-icon-png-svg.png" width ="25px" height=" 25px">  Add Contact </button> 
-	 <p onclick="" id="btn1"><img src="file:///C:/Users/spirit/Desktop/projet/add-circle-outline-logo-icon-png-svg%20-%20Copy.png" width ="25px" height=" 25px">Clear list </button> 
-       </div>
-	
-      <div id="contenu"> 
-    
 
+	 <span class=" spanadd"> 
+	 <img src="file:///C:/Users/spirit/Desktop/projet/add-circle-outline-logo-icon-png-svg.png" width ="25px" height=" 25px">  
+	 <a onclick="document.getElementById('id01').style.display='block'" id="btn">  Add Contact </a> 
+	 </span>
+
+	 <span class="spandelete">
+	 <img src="file:///C:/Users/spirit/Desktop/projet/add-circle-outline-logo-icon-png-svg%20-%20Copy.png" width ="25px" height=" 25px">
+	 <a onclick="clear1();" id="btn1"> Clear list </a>
+	 </span>
+    
+       </div>
+	  <p id="nocont">No contact added yet :( <br><br> Click <b>Add Contact</b> button to add a new contact !</p>
+      <div id="contenu"> 
 	  </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	  
-
-	   
     
 	<div id="id01" class="modal">
 		<span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">×</span>
-		   <form class="modal-content">
+		<form class="modal-content">
 		   <div class="container">
 			
-			<p class="welcome">Welcome to Contactium! </p>
-			<p class="sign" align="center"> Contact Informations</p>
+			      <p class="welcome">Welcome to Contactium! </p>
+			      <p class="sign" align="center"> Contact Informations</p>
+
 			     <form class="form1" >
 			         <input class="un " type="text" align="center" placeholder="Full name" id="nom">
 			         <input class="pass" type="text" align="center" placeholder="Number" id="ncin">
@@ -299,7 +346,7 @@ window.onload = function change(){
 
 			     </form>
 		      </div>
-		    </form>
+		</form>
 
 	 </div>
 
@@ -310,16 +357,17 @@ window.onload = function change(){
 		   <div class="container">
 			
 			<p class="welcome">Welcome to Contactium! </p>
-			<p class="sign" align="center">Profile Informations</p>
-			<form class="form1" >
-			  <input class="un " type="text" align="center"  id="nom1"  >
-			  <input class="pass" type="text" align="center"  id="ncin1"   >
-			  <input class="pass" type="email" align="center"  id="email" placeholder="Email" >
-			  <a onclick="update();" type="submit" id="addbut">Update profile</a>      
-			  <a id="cancel" onclick="document.getElementById('id02').style.display='none'" id="cancel" >Cancel</a>
+			<p class="sign" align="center"> New Profile Informations</p>
+			 <form class="form1" >
+			     <input class="un " type="text" align="center"  id="nom1"  >
+			     <input class="pass" type="text" align="center"  id="ncin1"   >
+			     <input class="pass" type="email" align="center"  id="email" placeholder="Email" >
+			     <a onclick="update();" type="submit" id="addbut">Update profile</a>      
+			     <a id="cancel" onclick="document.getElementById('id02').style.display='none'" id="cancel" >Cancel</a>
               
-			</form>
-		    </div>
+			 </form>
+		  </div>
+
 		</form>
 
 	  </div>
@@ -332,7 +380,7 @@ window.onload = function change(){
 		   <div class="container">
 			
 			<p class="welcome">Welcome to Contactium! </p>
-			<p class="sign" align="center">New Profile Informations</p>
+			<p class="sign" align="center">Contact Informations</p>
 			<form class="form1" >
 			  <input class="un " type="text" align="center"  id="NAME"  >
 			  <input class="pass" type="text" align="center"  id="NCIN"   >
@@ -346,10 +394,8 @@ window.onload = function change(){
 
 	  </div>
 
-
-
-
-
+ 
+	
 
 
 
