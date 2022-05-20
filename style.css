@@ -1,5 +1,7 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;1,200&display=swap');
+
+
 body{
     margin: 0px;
     padding: 0px;
@@ -19,7 +21,7 @@ nav{
 nav span { 
     color : white ;
     display: grid;
-    grid-template-columns:30px 100px ; 
+    grid-template-columns:30px 250px ; 
     margin-left:  300px;
 }
 nav span #user { 
@@ -27,13 +29,15 @@ nav span #user {
    margin-left: 50px ;
    font-size:18px;
    font-weight: bold;
-    transition: 0.2s;
+  
     cursor: pointer;
+
 }
-nav span #user:hover { 
+#span{transition: 0.2s;}
+#span:hover { 
   
     transform : scale(1.04);
-    
+   
 }
 
 
@@ -114,6 +118,21 @@ background-color: 	#f5faf9;
 border-radius: 15px;
 margin-top: 10px;
 }
+
+.spanadd img {
+
+margin-top: 22px;
+position:absolute;
+
+left :1075px;
+}
+.spandelete img {
+
+
+    position:absolute;
+    margin-top: 22px;
+    left : 1275px;
+    }
 #btn { 
  font-weight: bold ;
  padding:10px;
@@ -132,14 +151,16 @@ margin-top: 10px;
     height: 2px;
     background: #00c2cc;
     transition:  0.3s;
-   
 	
 }
 
 #btn:hover::after {
-    width: 90%;
+    width: 74%;
     transition:  0.3s;
 	
+}
+#btn:hover{ 
+  font-size: 19.5px;
 }
 
 #btn1 { 
@@ -164,10 +185,13 @@ margin-top: 10px;
    }
    
    #btn1:hover::after {
-       width: 80%;
+       width: 40%;
        transition:  0.3s;
        
    }
+   #btn1:hover{ 
+    font-size: 19.5px;
+  }
 .modal {
     display: none;
     position: fixed; 
@@ -195,11 +219,11 @@ margin-top: 10px;
   /* close css */
   .close {
     position: absolute;
-    right: 35px;
-    top: 15px;
+    right: 600px;
+    top: 160px;
     font-size: 40px;
     font-weight: bold;
-    color: #f1f1f1;
+    color: rgb(0,0,0,0.5);
   }
   
   .close:hover,
@@ -354,6 +378,7 @@ font-family: "Montserrat", sans-serif;
    #addbut:hover::after {
        width: 29%;
        transition:  0.3s;
+      
        
    }
    
@@ -368,6 +393,9 @@ font-family: "Montserrat", sans-serif;
 
  }
  
+
+
+
  #contact{
     margin-top: 20px;
     margin-left: 20px;
@@ -389,12 +417,21 @@ transform: scale(1.02);
 
  #contact img { 
   
-  width : 100px;
+  width : 150px;
   height : 150px;
-  border-radius: 20px;
+  border-radius: 100px;
   margin-top: 20px;
   margin-left:10px;
  }
+
+ #esm{ 
+  margin-bottom: 150px;
+  margin-right: 50px;
+
+
+ }
+
+
 
 #span1{ 
  position : absolute;
@@ -473,4 +510,17 @@ transform: scale(1.02);
     width: 100%;
     transition:  0.3s;
     
+}
+
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width :  1200px)
+                    and ( max-width:1600px) 
+{
+   
+  
+
+    
+
+
 }
