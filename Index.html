@@ -6,18 +6,20 @@
 var nb = 0 ; 
 window.onload = function change(){
 
+
 	retrieve();  
 	
 
+   // we take new account informations from login page to fill username, photo and his phone number.  
+
 	let a= document.getElementById("user").innerHTML=localStorage.getItem("username");
-        // khdhina el esm ml input (type =text ) mtaa page login.html
 	     var img = document.createElement("img");
         
         var filename =localStorage.getItem("pic");
         
         filename = filename.substring(filename.lastIndexOf('\\')+1);
 
-            // Tester si le fichier uploadé est une image
+            //Test if the uploaded file is an image
             extension = filename.substring(filename.lastIndexOf('.')+1);
             switch(extension)
             {
@@ -41,7 +43,7 @@ window.onload = function change(){
 
                                  }
 
-								 
+			//this function show a modal and fill input text by values stocked in localstorage					 
 		function profile()
 		{
 		document.getElementById('id02').style.display='block';
@@ -53,7 +55,7 @@ window.onload = function change(){
 
 
 
-
+      //update function 
         function update()
 		{   
 			nom=  document.getElementById("nom1").value;
@@ -71,7 +73,7 @@ window.onload = function change(){
 
 
 
-
+   //verify phone number function : 
 
 		function verif_ncin(ncin) {
             let v = true;
@@ -83,7 +85,7 @@ window.onload = function change(){
             return v;
         }
 
-
+    //add new contact to the #contenu  : 
 		function add_contact()
         { 
 
@@ -120,28 +122,36 @@ window.onload = function change(){
             }
 
        
-
-
+        
 		 if(valid)
 		        {  
-		 nb++ ;
+          //we're adding new contact so #nocont div will be not displayed 
 		 document.getElementById("nocont").style.display="none";
+
+		   //creating new elements to #contenu 
          let kaka=document.createElement("div");
 		 kaka.id="contact";
+
+
          let a=document.createElement("h2");
          let node1 = document.createTextNode(nom);
 		 a.id="esm";
+		 a.classList.add('aclass');
          a.appendChild(node1);
         
 		 let b = document.createElement("span");
 		 let node2=document.createTextNode(num);
-         b.appendChild(node2);
+		 b.classList.add('bclass');
          b.id="span1";
+         b.appendChild(node2);
+		
 
 
 		 let c = document.createElement("span");
 		 let node3=document.createTextNode(job);
+		 c.classList.add('cclass');
 		 c.id="span2";
+
          c.appendChild(node3);
 		 
 		 
@@ -168,6 +178,8 @@ window.onload = function change(){
             img.width = 90;
             img.height = 150;
             
+
+		   //create update button 
           let up=document.createElement("p");
 		  let update=document.createTextNode("Update");
 		   up.appendChild(update);
@@ -190,21 +202,22 @@ window.onload = function change(){
 		  
 
 
-
+          //create delete button 
 		let del=document.createElement("p");
 		let delet=document.createTextNode("Delete");
 		del.id="del";
 
+           //add a function when click to delete button 
 		del.addEventListener("click", function () {
         this.parentElement.remove();
 		field=document.getElementById("contenu");
          localStorage.setItem("Folder1", field.innerHTML);
         nb--;
         });
+          
+
 
 		del.appendChild(delet);
-
-	
 		 kaka.appendChild(up);
 		 kaka.appendChild(del);
          kaka.appendChild(img);
@@ -213,12 +226,13 @@ window.onload = function change(){
 		 kaka.appendChild(c);
          field.appendChild(kaka);
         
-
+         //store the whole #contenu(field) to local storage 
 		 localStorage.setItem("Folder1", field.innerHTML);
 		
+		  //closing modal at the end 
          document.getElementById('id01').style.display='none';
          
-		 nb++;
+	
 		             }
 		else alert(erreur);
 		
@@ -227,13 +241,21 @@ window.onload = function change(){
 
 	 
 
+   //retrieve function will be called onreload , displaying stored content every time we reload page 
+      
+  		function retrieve() {
 
-
-		function retrieve() {
+			 //if we dont have any content in folder1 stored in localstorage , adding a new 
     if (localStorage.getItem("Folder1") === null) a=document.getElementById("nocont").style.display="block";
     else {
+          
+		 //display stored content 
       document.getElementById("contenu").innerHTML = localStorage.getItem("Folder1");
+
+	  //in this case folder1!=NULL  ,so nocont will be not displayed 
       document.getElementById("nocont").style.display="none";
+
+
 
       let buttons = document.getElementsByTagName("p");
        
@@ -247,7 +269,7 @@ window.onload = function change(){
             localStorage.setItem("Folder1", field.innerHTML);});
                                              }
                                                }
-		
+												   
         let clear=document.getElementById("btn1");
 		clear.addEventListener("click",function() {
         document.getElementById("contenu").remove();
@@ -266,27 +288,68 @@ window.onload = function change(){
 
 	 function update2()
 	 {
-
     let a=document.getElementById("NAME").value;
     let b=document.getElementById("NCIN").value;
     let c=document.getElementById("JOB").value;
     
-
     let esm= document.getElementById("esm").innerHTML=a;
     let NCIN= document.getElementById("span1").innerHTML=b;
     let JOBB= document.getElementById("span2").innerHTML=c;
+	
 	
      document.getElementById('id03').style.display='none'
 
 
 }
 
+
+
+
+
+
+
+  //clear function will clear every contact we have from the page and localstorage 
    function clear1()
    {
 	document.getElementById("contenu").remove();
 	localStorage.removeItem('Folder1');
 	location.reload();
    }
+
+
+   function search_contact() {
+    let input = document.getElementById('searchbar').value;
+    input=input.toLowerCase();
+	let a = document.getElementById("contenu");
+	
+	var y = document.getElementsByClassName("bclass");
+	var x = document.getElementsByClassName("aclass");
+
+	
+	var  img = document.querySelectorAll("div>img");
+
+	let b = document.getElementById("found");
+	found=""
+    for (i = 0; i < x.length; i++) { 
+       
+        if (x[i].innerHTML.toLowerCase().includes(input)) {    
+	    	src=img[i].src;
+	     found+="<div class='founddiv'><h2 class='foundname'>" + x[i].innerHTML+"</h2>"+"<span class='foundnum'>"+y[i].innerHTML+"</span> <img class='foundimg'src='"+src+"'></div>"; 
+		                                                  }								
+                                  }
+		 a.style.display="none";
+	     b.innerHTML=found; 
+		 //setTimeout(donesearch,6000);
+         
+         
+   }
+   function donesearch(){
+
+    let a = document.getElementById("contenu").style.display="grid";
+	let b = document.getElementById("found").innerHTML="";
+    document.getElementById("searchbar").value="";
+   }
+
 
 
 </script>
@@ -306,25 +369,33 @@ window.onload = function change(){
 
 	
    <section> 
-	   <div id="add">
+	<div id="add">
 	 <h2 id="titre"> Contacts </h2>
 
 	 <span class=" spanadd"> 
-	 <img src="file:///C:/Users/spirit/Desktop/projet/add-circle-outline-logo-icon-png-svg.png" width ="25px" height=" 25px">  
-	 <a onclick="document.getElementById('id01').style.display='block'" id="btn">  Add Contact </a> 
+	       <img src="file:///C:/Users/spirit/Desktop/projet/add-circle-outline-logo-icon-png-svg.png" width ="25px" height=" 25px">  
+	       <a onclick="document.getElementById('id01').style.display='block'" id="btn">  Add Contact </a> 
 	 </span>
 
 	 <span class="spandelete">
-	 <img src="file:///C:/Users/spirit/Desktop/projet/add-circle-outline-logo-icon-png-svg%20-%20Copy.png" width ="25px" height=" 25px">
-	 <a onclick="clear1();" id="btn1"> Clear list </a>
-	 </span>
+	         <img src="file:///C:/Users/spirit/Desktop/projet/add-circle-outline-logo-icon-png-svg%20-%20Copy.png" width ="25px" height=" 25px">
+	         <a onclick="clear1();" id="btn1"> Clear list </a>
+	  </span>
     
-       </div>
+     </div>
+
+	     
+	 <input type="text" class="searchTerm" placeholder="Search contact " id="searchbar" onkeyup="search_contact();">
+	 <button type="submit" class="searchButton"  onclick="donesearch();"> Done</button>
+
+
 	  <p id="nocont">No contact added yet :( <br><br> Click <b>Add Contact</b> button to add a new contact !</p>
       <div id="contenu"> 
 	  </div>
-
+      <div id="found"> </div>
     
+
+
 	<div id="id01" class="modal">
 		<span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">×</span>
 		<form class="modal-content">
@@ -349,6 +420,9 @@ window.onload = function change(){
 	 </div>
 
 
+
+
+
 	  <div id="id02" class="modal">
 		<span onclick="document.getElementById('id02').style.display='none'" class="close" title="Close Modal">×</span>
 		<form class="modal-content">
@@ -360,7 +434,7 @@ window.onload = function change(){
 			     <input class="un " type="text" align="center"  id="nom1"  >
 			     <input class="pass" type="text" align="center"  id="ncin1"   >
 			     <input class="pass" type="email" align="center"  id="email" placeholder="Email" >
-			     <a onclick="update();" type="submit" id="addbut">Update profile</a>      
+			     <a onclick="this.update();" type="submit" id="addbut">Update profile</a>      
 			     <a id="cancel" onclick="document.getElementById('id02').style.display='none'" id="cancel" >Cancel</a>
               
 			 </form>
@@ -370,6 +444,9 @@ window.onload = function change(){
 
 	  </div>
 
+
+
+	  
 	  
 
 	  <div id="id03" class="modal">
