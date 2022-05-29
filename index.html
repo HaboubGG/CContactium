@@ -1,0 +1,91 @@
+<html>
+
+<head>
+ <link rel="stylesheet" href="login.css">
+  <script> 
+   function verif_ncin(ncin) {
+            let v = true;
+            let taille = ncin.length;
+            for(let i=0; i<taille; ++i) {
+                if ((ncin.charAt(i) < "0") || (ncin.charAt(i) > "9") || (taille!=8)) 
+                    v = false;
+            }
+            return v;
+        }
+  function verif()
+        {  
+            let valid = true;
+            let nom = document.getElementById('nom').value;
+            let ncin = document.getElementById('ncin').value;
+            let pass = document.getElementById('pass').value;
+            let erreur = "";
+         
+            if(nom.length <= 0) { 
+                erreur += 'You need to enter your name!  ';
+           
+                valid = false;
+            }
+
+            
+            if(ncin.length <= 0) { 
+                erreur += 'You need to enter your number!  ';
+              
+                valid = false;
+            } else if (!verif_ncin(ncin)) {
+                erreur += ' Invalid number!  ';
+               
+                valid = false;
+            }
+
+       
+            if(pass.length <= 0) { 
+                erreur += 'Invalid password !  ' ;
+              
+                valid = false;
+            } 
+
+    
+            if (valid) {
+               alert("Sign in complete  ");
+               name=document.getElementById("nom").value;
+               localStorage.setItem("username",name);
+
+               photo=document.getElementById("photo").value;
+               localStorage.setItem("pic",photo);
+
+               number=document.getElementById("ncin").value;
+               localStorage.setItem("num",number);
+               
+               location.replace("Index.html");
+
+            
+            }else {
+             alert( erreur);
+            }
+            return valid;
+            
+        }
+ </script>
+
+    <title>Sign in</title>
+</head>
+
+<body>
+  <div class="main">
+
+   
+    <p class="welcome">Welcome to Contactium! </p>
+    <p class="sign" align="center">Sign in</p>
+    <form class="form1" >
+      <input class="un " type="text" align="center" placeholder="Username" id="nom">
+      <input class="pass" type="text" align="center" placeholder="Number" id="ncin">
+      <input class="pass" type="password" align="center" placeholder="Password" id="pass">
+    
+      <input class="pass" type="file" align="center" placeholder="Photo" id="photo">
+      <p onclick="verif();" type="submit" id="btn1">Sign in</p>      
+                
+    </div>
+     
+</body>
+
+</html>

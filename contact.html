@@ -1,0 +1,161 @@
+<html>
+<head>
+<link rel="stylesheet" href="style.css">
+<script src="main.js"> </script>
+</head>
+  <body>
+	<nav>
+		   <span id="span"> 
+			    
+			    <a id="user" onclick="profile();" ></a>
+			</span>
+		   <h1>Contactium,</h1>
+		   <ul> 
+			  <li><a href="#span">Contacts</a></li>
+			  <li><a href="#ser">About</a></li>
+			</ul> 
+		</nav>	 
+
+	
+   <section> 
+	<div id="add">
+	 <h2 id="titre"> Contacts </h2>
+
+	 <span class=" spanadd"> 
+	       <img src="add-circle-outline-logo-icon-png-svg.png" width ="25px" height=" 25px">  
+	       <a onclick="document.getElementById('id01').style.display='block'" id="btn">  Add Contact </a> 
+	 </span>
+
+	 <span class="spandelete">
+	         <img src="add-circle-outline-logo-icon-png-svg%20-%20Copy.png" width ="25px" height=" 25px">
+	         <a onclick="clear1();" id="btn1"> Clear list </a>
+	  </span>
+    
+     </div>
+
+	     
+	 <input type="text" class="searchTerm" placeholder="Search contact " id="searchbar" onkeyup="search_contact();">
+	 
+	 <button type="submit" class="searchButton" id="donebutton" onclick="donesearch();"> Done</button>
+
+
+	 <div id ="nocont"class="alert simple-alert">
+		<h3>0 contact added ! <br><br></h3>
+	  </div>
+
+      <div id="contenu"> 
+	  </div>
+      <div id="found"> </div>
+    
+
+
+	<div id="id01" class="modal">
+		<span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">×</span>
+		<form class="modal-content">
+		   <div class="container">
+			
+			      <p class="welcome">Welcome to Contactium! </p>
+			      <p class="sign" align="center"> Contact Informations</p>
+
+			     <form class="form1" >
+			         <input class="un " type="text" align="center" placeholder="Full name" id="nom">
+			         <input class="pass" type="text" align="center" placeholder="Number" id="ncin">
+					 <input class="pass" type="text" align="center" placeholder="Employment" id="job">
+
+					 <br>
+					 <div id="gen">
+					 <input class="gender" type="radio" align="center" id="gender" value="Male" name="gender">Male 
+					 <input class="gender" type="radio" align="center" id="gender" value="Female" name="gender" >Female
+					</div>
+					 <br>
+			         <input class="pass" type="file" align="center" placeholder="Photo" id="photo">
+				
+			         <a onclick="add_contact();" type="submit" id="addbut">Add Contact </a>      
+			         <a id="cancel" onclick="document.getElementById('id01').style.display='none'" id="cancel" >Cancel</a>
+
+			     </form>
+		      </div>
+		</form>
+
+	 </div>
+
+
+
+
+
+	  <div id="id02" class="modal">
+		<span onclick="document.getElementById('id02').style.display='none'" class="close" title="Close Modal">×</span>
+		<form class="modal-content">
+		   <div class="container">
+			
+			<p class="welcome">Welcome to Contactium! </p>
+			<p class="sign" align="center"> New Profile Informations</p>
+			 <form class="form1" >
+			     <input class="un " type="text" align="center"  id="nom1"  >
+			     <input class="pass" type="text" align="center"  id="ncin1"   >
+			     <input class="pass" type="email" align="center"  id="email" placeholder="Email" >
+			     <a onclick="update();" type="submit" id="addbut">Update profile</a>      
+			     <a id="cancel" onclick="document.getElementById('id02').style.display='none'" id="cancel" >Cancel</a>
+              
+			 </form>
+		  </div>
+
+		</form>
+
+	  </div>
+
+
+
+	  
+	  
+
+	  <div id="id03" class="modal">
+		<span onclick="document.getElementById('id03').style.display='none'" class="close" title="Close Modal">×</span>
+		<form class="modal-content">
+		   <div class="container">
+			
+			<p class="welcome">Welcome to Contactium! </p>
+			<p class="sign" align="center">Contact Informations</p>
+			<form class="form1" >
+			  <input class="un " type="text" align="center"  id="NAME"  >
+			  <input class="pass" type="text" align="center"  id="NCIN"   >
+			  <input class="pass" type="text" align="center"  id="JOB" placeholder="Job" >
+			  <a onclick="update2();" type="submit" id="addbut">Update profile</a>      
+			  <a id="cancel" onclick="document.getElementById('id03').style.display='none'" id="cancel" >Cancel</a>
+              
+			</form>
+		    </div>
+		</form>
+
+	  </div>
+   </section>
+
+
+   <footer>
+  
+	<h1>Our services</h1>
+	<div class="services" id="ser">
+		
+		<div class="service">
+			<h3>About us</h3>
+			<p>Back up your contacts and sync them across all your devices.<br>
+				 • Back up your Google Account contacts to a safe place in the cloud.
+				<br>
+				• Access your Google Account contacts on any device.</p>
+		</div>
+
+		<div class="service">
+			<h3>Benefits</h3>
+			<p>Benefit from an organized and automatically updated contact list.<br> 
+			• View your contacts by account (work account or personal account, for example).</p>
+		</div>
+
+		<div class="service">
+			<h3><b>Contactium </b></h3>
+			<p> Contactium is an excellent solution to manage your contacts in the simplest possible way.</p>
+		</div>
+
+	</div>
+</footer>
+  </body>
+</html>
